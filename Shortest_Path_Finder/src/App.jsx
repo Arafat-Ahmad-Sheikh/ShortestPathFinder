@@ -1,104 +1,9 @@
-// // import React, { useState } from "react";
-// // import "./App.css";
-
-// // const numRows = 13;
-// // const numCols = 30;
-
-// // export default function App() {
-// //   const [nodes, setNodes] = useState([]);
-
-// //   const handleCellClick = (row, col) => {
-// //     // Avoid duplicate node creation
-// //     const exists = nodes.some(node => node.row === row && node.col === col);
-// //     if (!exists) {
-// //       setNodes([...nodes, { row, col }]);
-// //     }
-// //   };
-
-// //   const renderGrid = () => {
-// //     const grid = [];
-// //     for (let row = 0; row < numRows; row++) {
-// //       const cols = [];
-// //       for (let col = 0; col < numCols; col++) {
-// //         const isNode = nodes.some(node => node.row === row && node.col === col);
-// //         cols.push(
-// //           <div
-// //             key={`${row}-${col}`}
-// //             className={`cell ${isNode ? "node" : ""}`}
-// //             onClick={() => handleCellClick(row, col)}
-// //           />
-// //         );
-// //       }
-// //       grid.push(
-// //         <div key={row} className="grid-row">
-// //           {cols}
-// //         </div>
-// //       );
-// //     }
-// //     return grid;
-// //   };
-
-// //   return (
-// //     <div className="grid">
-// //       {renderGrid()}
-// //     </div>
-// //   );
-// // }
-
-
-// import React, { useState } from "react";
-// import "./App.css";
-
-// const numRows = 20;
-// const numCols = 40;
-
-// export default function App() {
-//   const [nodes, setNodes] = useState([]);
-
-//   const handleCellClick = (row, col) => {
-//     const exists = nodes.some(node => node.row === row && node.col === col);
-//     if (!exists) {
-//       const nodeNumber = nodes.length;
-//       setNodes([...nodes, { row, col, number: nodeNumber }]);
-//     }
-//   };
-
-//   const renderGrid = () => {
-//     const grid = [];
-//     for (let row = 0; row < numRows; row++) {
-//       const cols = [];
-//       for (let col = 0; col < numCols; col++) {
-//         const node = nodes.find(n => n.row === row && n.col === col);
-//         cols.push(
-//           <div
-//             key={`${row}-${col}`}
-//             className="cell"
-//             onClick={() => handleCellClick(row, col)}
-//           >
-//             {node && (
-//               <div className="node">
-//                 <span className="node-number">{node.number}</span>
-//               </div>
-//             )}
-//           </div>
-//         );
-//       }
-//       grid.push(
-//         <div key={row} className="grid-row">
-//           {cols}
-//         </div>
-//       );
-//     }
-//     return grid;
-//   };
-
-//   return <div className="grid">{renderGrid()}</div>;
-// }
-
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Grid from "./Grid";
 import Controls from "./Controls";
+import { dijkstra } from "./dijkstra";
+import { floydWarshall } from "./floyds";
+
 import "./App.css";
 
 function App() {
@@ -107,6 +12,10 @@ function App() {
   const [edgeMode, setEdgeMode] = useState(false);
   const [edgeNodes, setEdgeNodes] = useState([]);
   const [weight, setWeight] = useState("");
+  const [algorithm, setAlgorithm] = useState("dijkstra");
+  const [source, setSource] = useState("");
+  const [destination, setDestination] = useState("");
+  const [shortestPath, setShortestPath] = useState([]);
 
   const handleAddNode = (row, col) => {
     const exists = nodes.some(n => n.row === row && n.col === col);
@@ -132,7 +41,7 @@ function App() {
       );
 
       if (!exists && first.number !== second.number) {
-        setEdges([...edges, { from: first.number, to: second.number, weight }]);
+        setEdges([...edges, { from: first.number, to: second.number, weight: Number(weight) }]);
       }
 
       setEdgeNodes([]);
@@ -140,6 +49,23 @@ function App() {
       setWeight("");
     }
   };
+
+  useEffect(() => {
+    if (
+      source !== "" &&
+      destination !== "" &&
+      nodes.length > 0 &&
+      edges.length > 0
+    ) {
+      let path = [];
+      if (algorithm === "dijkstra") {
+        path = dijkstra(nodes.length, edges, Number(source), Number(destination));
+      } else {
+        path = floydWarshall(nodes.length, edges, Number(source), Number(destination));
+      }
+      setShortestPath(path);
+    }
+  }, [algorithm, source, destination, edges]);
 
   return (
     <div>
@@ -149,12 +75,20 @@ function App() {
         setWeight={setWeight}
         setEdgeMode={setEdgeMode}
         edgeMode={edgeMode}
+        nodes={nodes}
+        algorithm={algorithm}
+        setAlgorithm={setAlgorithm}
+        source={source}
+        destination={destination}
+        setSource={setSource}
+        setDestination={setDestination}
       />
       <Grid
         nodes={nodes}
         edges={edges}
         onCellClick={handleAddNode}
         onNodeClick={handleNodeClick}
+        shortestPath={shortestPath}
       />
     </div>
   );
