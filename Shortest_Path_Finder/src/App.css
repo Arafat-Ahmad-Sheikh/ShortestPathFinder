@@ -2,6 +2,7 @@
   position: relative;
   width: fit-content;
   margin: 0 auto;
+  background-color: #222222;
 }
 
 .edge-layer {
@@ -25,8 +26,8 @@
 }
 
 .cell {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border: none;
   display: flex;
   align-items: center;

@@ -3,7 +3,6 @@ import Grid from "./Grid";
 import Controls from "./Controls";
 import { dijkstra } from "./dijkstra";
 import { floydWarshall } from "./floyds";
-
 import "./App.css";
 
 function App() {
@@ -24,7 +23,7 @@ function App() {
     setEdgeMode(false);
     setEdgeNodes([]);
     setWeight("");
-    setAlgorithm("dijkstra");
+    setAlgorithm("");
     setSource("");
     setDestination("");
     setShortestPath([]);
@@ -86,7 +85,6 @@ function App() {
   
   return (
     <div>
-      <h2 style={{ textAlign: "center" }}>Graph Visualizer</h2>
       <Controls
       weight={weight}
       setWeight={setWeight}
