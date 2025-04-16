@@ -11,7 +11,9 @@ export default function Controls({
   source,
   destination,
   setSource,
-  setDestination
+  setDestination,
+  setTriggerPath,      
+  handleClearAll       
 }) {
   return (
     <div className="controls">
@@ -27,6 +29,7 @@ export default function Controls({
       />
 
       <select value={algorithm} onChange={(e) => setAlgorithm(e.target.value)}>
+        <option value="">Algorithm</option>
         <option value="dijkstra">Dijkstra</option>
         <option value="floyd">Floyd-Warshall</option>
       </select>
@@ -48,6 +51,18 @@ export default function Controls({
           </option>
         ))}
       </select>
+
+      <button
+      onClick={() => setTriggerPath(true)}
+      disabled={source === "" || destination === "" || algorithm === ""}
+    >
+      Find Path
+    </button>
+
+
+      <button onClick={handleClearAll}>
+        Clear All
+      </button>
     </div>
   );
 }

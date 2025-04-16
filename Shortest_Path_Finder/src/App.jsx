@@ -12,10 +12,23 @@ function App() {
   const [edgeMode, setEdgeMode] = useState(false);
   const [edgeNodes, setEdgeNodes] = useState([]);
   const [weight, setWeight] = useState("");
-  const [algorithm, setAlgorithm] = useState("dijkstra");
+  const [algorithm, setAlgorithm] = useState("");
   const [source, setSource] = useState("");
   const [destination, setDestination] = useState("");
   const [shortestPath, setShortestPath] = useState([]);
+  const [triggerPath, setTriggerPath] = useState(false);
+
+  const handleClearAll = () => {
+    setNodes([]);
+    setEdges([]);
+    setEdgeMode(false);
+    setEdgeNodes([]);
+    setWeight("");
+    setAlgorithm("dijkstra");
+    setSource("");
+    setDestination("");
+    setShortestPath([]);
+  };  
 
   const handleAddNode = (row, col) => {
     const exists = nodes.some(n => n.row === row && n.col === col);
@@ -52,37 +65,44 @@ function App() {
 
   useEffect(() => {
     if (
+      triggerPath &&
       source !== "" &&
       destination !== "" &&
+      algorithm !== "" && // Ensure algorithm is selected
       nodes.length > 0 &&
       edges.length > 0
     ) {
       let path = [];
       if (algorithm === "dijkstra") {
         path = dijkstra(nodes.length, edges, Number(source), Number(destination));
-      } else {
+      } else if (algorithm === "floyd") {
         path = floydWarshall(nodes.length, edges, Number(source), Number(destination));
       }
       setShortestPath(path);
+      setTriggerPath(false); // reset trigger
     }
-  }, [algorithm, source, destination, edges]);
-
+  }, [triggerPath, source, destination, algorithm, nodes, edges]);
+  
+  
   return (
     <div>
       <h2 style={{ textAlign: "center" }}>Graph Visualizer</h2>
       <Controls
-        weight={weight}
-        setWeight={setWeight}
-        setEdgeMode={setEdgeMode}
-        edgeMode={edgeMode}
-        nodes={nodes}
-        algorithm={algorithm}
-        setAlgorithm={setAlgorithm}
-        source={source}
-        destination={destination}
-        setSource={setSource}
-        setDestination={setDestination}
-      />
+      weight={weight}
+      setWeight={setWeight}
+      setEdgeMode={setEdgeMode}
+      edgeMode={edgeMode}
+      nodes={nodes}
+      algorithm={algorithm}
+      setAlgorithm={setAlgorithm}
+      source={source}
+      destination={destination}
+      setSource={setSource}
+      setDestination={setDestination}
+      setTriggerPath={setTriggerPath}
+      handleClearAll={handleClearAll}
+    />
+
       <Grid
         nodes={nodes}
         edges={edges}
