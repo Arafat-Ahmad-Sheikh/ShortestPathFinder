@@ -2,7 +2,7 @@
   position: relative;
   width: fit-content;
   margin: 0 auto;
-  background-color: #222222;
+  background-color: rgb(34, 34, 34);
 }
 
 .edge-layer {
@@ -26,17 +26,16 @@
 }
 
 .cell {
-  width: calc(100vw / 30);
+  width: calc(99vw / 30);
   height: calc(100vh / 16);
-  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .node {
-  width: 40px;
-  height: 40px;
+  width: calc(99vw / 30);
+  height: calc(99vw / 30);
   background-color: #3498db;
   border-radius: 50%;
   color: white;

@@ -9,20 +9,35 @@ export default function Grid({ nodes, edges, onCellClick, onNodeClick, shortestP
   const nodeRefs = useRef({});
 
   useEffect(() => {
-    const newPositions = {};
-    nodes.forEach((node) => {
-      const ref = nodeRefs.current[node.number];
-      if (ref && containerRef.current) {
-        const rect = ref.getBoundingClientRect();
-        const containerRect = containerRef.current.getBoundingClientRect();
-        newPositions[node.number] = {
-          x: rect.left - containerRect.left + rect.width / 2,
-          y: rect.top - containerRect.top + rect.height / 2,
-        };
-      }
-    });
-    setPositions(newPositions);
+    const updatePositions = () => {
+      const newPositions = {};
+      nodes.forEach((node) => {
+        const ref = nodeRefs.current[node.number];
+        if (ref && containerRef.current) {
+          const rect = ref.getBoundingClientRect();
+          const containerRect = containerRef.current.getBoundingClientRect();
+          newPositions[node.number] = {
+            x: rect.left - containerRect.left + rect.width / 2,
+            y: rect.top - containerRect.top + rect.height / 2,
+          };
+        }
+      });
+      setPositions(newPositions);
+    };
+  
+    updatePositions();
+  
+    const resizeObserver = new ResizeObserver(updatePositions);
+    if (containerRef.current) {
+      resizeObserver.observe(containerRef.current);
+    }
+  
+    return () => {
+      resizeObserver.disconnect();
+    };
   }, [nodes]);
+  
+  
 
   const isInPath = (from, to) => {
     for (let i = 0; i < shortestPath.length - 1; i++) {
