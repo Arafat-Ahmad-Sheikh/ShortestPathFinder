@@ -62,7 +62,7 @@ export default function Grid({ nodes, edges, onCellClick, onNodeClick, shortestP
           const dx = to.x - from.x;
           const dy = to.y - from.y;
           const length = Math.sqrt(dx * dx + dy * dy);
-          const radius = 13;
+          const radius = 20;
           const offsetX = (dx / length) * radius;
           const offsetY = (dy / length) * radius;
 
@@ -74,7 +74,7 @@ export default function Grid({ nodes, edges, onCellClick, onNodeClick, shortestP
           const midX = (startX + endX) / 2;
           const midY = (startY + endY) / 2;
 
-          const color = isInPath(edge.from, edge.to) ? "red" : "black";
+          const color = isInPath(edge.from, edge.to) ? "red" : "white";
 
           return (
             <g key={i}>
@@ -82,7 +82,7 @@ export default function Grid({ nodes, edges, onCellClick, onNodeClick, shortestP
               <text
                 x={midX}
                 y={midY - 5}
-                fontSize="14px"
+                fontSize="1.4rem"
                 fontFamily="Courier New, monospace"
                 fontWeight="bold"
                 textAnchor="middle"

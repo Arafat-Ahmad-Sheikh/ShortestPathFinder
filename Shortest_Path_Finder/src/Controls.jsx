@@ -205,7 +205,7 @@ export default function Controls({
 
         {/* Centered Heading */}
         <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
-          <span className="text-xl font-semibold">Shortest Path Finder</span>
+          <span className="text-3xl font-semibold">Shortest Path Finder</span>
         </div>
 
         {/* Right placeholder (empty div for layout balance) */}
