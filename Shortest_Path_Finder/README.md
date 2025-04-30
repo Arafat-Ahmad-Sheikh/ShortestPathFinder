@@ -25,50 +25,57 @@ A dynamic web application built using **React.js** to visualize the shortest pat
 git clone https://github.com/yourusername/shortest-path-visualizer.git
 cd shortest-path-visualizer
 ```
-Installation
-Make sure you have Node.js installed, then run:
+## Installation
 
-bash
+Make sure you have [Node.js](https://nodejs.org/) installed, then run:
+
+```bash
 npm install
-Start the Application
-bash
+```
+
+## Start the Application
+
+```bash
 npm start
-This will start the development server. You can view the app at http://localhost:3000.
+```
 
-Usage
-Grid Interaction: Click on the grid to create nodes.
+This will start the development server.  
+Open [http://localhost:5173](http://localhost:5173) to view the app in your browser.
 
-Define Edges: Click between nodes to define weighted edges.
+## Usage
 
-Select Algorithm: Choose between Dijkstra or Floyd-Warshall from the dropdown.
+- **Grid Interaction:** Click on the grid to create nodes.
+- **Define Edges:** Click between nodes to define weighted edges.
+- **Select Algorithm:** Choose between Dijkstra or Floyd-Warshall from the dropdown.
+- **Find Shortest Path:** Select the source and destination nodes, then click "Find Path" to visualize the shortest path.
 
-Find Shortest Path: Select the source and destination nodes, then click "Find Path" to visualize the shortest path.
+## How It Works
 
-How It Works
-1. Grid Layout
-The grid consists of 16 rows and 30 columns.
+### 1. Grid Layout
 
-Click any cell to add a node. Each node is uniquely identified by its number.
+- The grid consists of 16 rows and 30 columns.
+- Click any cell to add a node. Each node is uniquely identified by its number.
 
-2. Node and Edge Management
-Click on a node to view its number.
+### 2. Node and Edge Management
 
-Create edges by clicking between nodes. The weight of each edge is visually represented on the grid.
+- Click on a node to view its number.
+- Create edges by clicking between nodes. The weight of each edge is visually represented on the grid.
 
-3. Shortest Path Algorithms
-Dijkstra's Algorithm: Calculates the shortest path from a source node to a destination node by iteratively updating the shortest known distance to each node.
+### 3. Shortest Path Algorithms
 
-Floyd-Warshall Algorithm: Computes the shortest paths between all pairs of nodes, enabling comprehensive pathfinding across the grid.
+- **Dijkstra's Algorithm:** Calculates the shortest path from a source node to a destination node by iteratively updating the shortest known distance to each node.
+- **Floyd-Warshall Algorithm:** Computes the shortest paths between all pairs of nodes, enabling comprehensive pathfinding across the grid.
 
-4. Path Visualization
-Once the shortest path is found, it is visually highlighted in red on the grid for easy identification.
+### 4. Path Visualization
 
-Future Improvements
-Dynamic Node Creation: Allow dynamic creation and removal of nodes through user input.
+- Once the shortest path is found, it is visually highlighted in red on the grid for easy identification.
 
-Algorithm Optimization: Implement additional algorithms like A* for more efficient pathfinding.
+## Future Improvements
 
-Graph Export: Enable saving and sharing of graph configurations.
+- **Dynamic Node Creation:** Allow dynamic creation and removal of nodes through user input.
+- **Algorithm Optimization:** Implement additional algorithms like A* for more efficient pathfinding.
+- **Graph Export:** Enable saving and sharing of graph configurations.
 
-License
-This project is licensed under the MIT License. See the LICENSE file for details.
+## License
+
+This project is licensed under the MIT License. 
