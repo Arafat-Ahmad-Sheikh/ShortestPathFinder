@@ -1,12 +1,26 @@
-# React + Vite
+# Shortest Path Visualizer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A dynamic web application built using **React.js** to visualize the shortest path algorithms (Dijkstra's and Floyd-Warshall) on a grid. Users can interact with the grid, select nodes, edges, and compute the shortest path between selected nodes. The application provides a clear and intuitive visual representation of the shortest path in red, and supports multiple algorithm selection.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Interactive Grid**: Users can click on grid cells to create nodes.
+- **Node and Edge Management**: Create and remove nodes and define weighted edges between them.
+- **Shortest Path Algorithms**: Supports **Dijkstra's Algorithm** and **Floyd-Warshall Algorithm** to find the shortest path between two selected nodes.
+- **Path Visualization**: The shortest path is visualized on the grid with red-colored edges.
+- **Responsive Design**: The application adjusts seamlessly to different screen sizes.
+  
+## Tech Stack
 
-## Expanding the ESLint configuration
+- **Frontend**: React.js, JavaScript, HTML, CSS
+- **State Management**: React State
+- **Styling**: Custom CSS for grid and node designs
+- **Algorithms**: Dijkstra's and Floyd-Warshall algorithms implemented in JavaScript
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Installation
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/shortest-path-visualizer.git
+cd shortest-path-visualizer
