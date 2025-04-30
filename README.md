@@ -36,7 +36,7 @@ npm install
 ## Start the Application
 
 ```bash
-npm start
+npm run dev
 ```
 
 This will start the development server.  
