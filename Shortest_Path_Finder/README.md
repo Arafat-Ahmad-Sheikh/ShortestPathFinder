@@ -75,7 +75,3 @@ Open [http://localhost:5173](http://localhost:5173) to view the app in your brow
 - **Dynamic Node Creation:** Allow dynamic creation and removal of nodes through user input.
 - **Algorithm Optimization:** Implement additional algorithms like A* for more efficient pathfinding.
 - **Graph Export:** Enable saving and sharing of graph configurations.
-
-## License
-
-This project is licensed under the MIT License. 
